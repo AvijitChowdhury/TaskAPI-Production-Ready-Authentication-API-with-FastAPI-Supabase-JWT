@@ -100,3 +100,38 @@ async def get_current_user(
     # ── Step 3: Return the verified user ─────────────────────
     # Injected into the route function as the `user` parameter.
     return response.user
+# from fastapi import Depends, HTTPException, status, Request
+# from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+# from app.supabase_client import supabase
+
+# bearer_scheme = HTTPBearer(auto_error=False)
+
+# async def get_current_user(
+#     request: Request,
+#     credentials: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
+# ):
+#     print("=" * 60)
+#     print("HEADERS:", dict(request.headers))
+#     print("CREDENTIALS:", credentials)
+#     print("=" * 60)
+
+#     if credentials is None or not credentials.credentials:
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Access token required",
+#             headers={"WWW-Authenticate": "Bearer"},
+#         )
+
+#     token = credentials.credentials
+
+#     try:
+#         response = supabase.auth.get_user(token)
+#         print("USER RESPONSE:", response)
+#     except Exception as e:
+#         print("SUPABASE ERROR:", repr(e))
+#         raise HTTPException(
+#             status_code=status.HTTP_401_UNAUTHORIZED,
+#             detail="Invalid or expired token",
+#         )
+
+#     return response.user

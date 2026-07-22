@@ -141,7 +141,7 @@ def custom_openapi():
     return app.openapi_schema
 
 
-app.openapi = custom_openapi
+# app.openapi = custom_openapi
 
 
 # ── Run locally ───────────────────────────────────────────────
