@@ -551,6 +551,62 @@ GET	/health	❌	Health check
 | 403 | Authenticated but not authorised |
 
 ---
+# Auth API — FlyRank W4 A4: Auth · Login & Protect
+
+Secure FastAPI API with Supabase Auth — signup, login, logout, JWT verification, protected routes, and Swagger HTTPBearer.
+
+---
+
+## What This Is
+
+A backend authentication system built around the **trust triangle**:
+
+```
+Client → POST /auth/login → Supabase (checks credentials, signs JWT)
+                                  ↓
+                           access_token (JWT) returned
+                                  ↓
+Client → GET /protected/profile → Your server (verifies JWT with Supabase) → 200 or 401
+```
+
+You never store passwords. You never write cryptography. Supabase does both — your job is receiving a token, verifying it, and opening (or refusing) the door.
+
+---
+
+## Setup
+
+### 1. Create a Supabase project
+
+1. Go to [supabase.com](https://supabase.com) → New project
+2. In **Project Settings → API**, copy:
+   - **Project URL** → `SUPABASE_URL`
+   - **anon/public key** → `SUPABASE_KEY` (never use the `service_role` key)
+3. In **Authentication → Sign In / Providers → Email**, turn **"Confirm email" OFF** for this practice project
+
+### 2. Configure environment
+
+```bash
+cp .env.example .env
+# Edit .env with your real SUPABASE_URL and SUPABASE_KEY
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run
+
+```bash
+uvicorn main:app --reload
+```
+
+Server starts on **http://localhost:8000**
+
+---
+
+## Endpoints
 
 ## The Full Auth Flow (curl)
 
